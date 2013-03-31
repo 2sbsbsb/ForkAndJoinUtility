@@ -9,7 +9,8 @@ It is more of an attempt to decouple fork/join/compute method etc etc from the b
 
 
 
-Usages 
+Usages
+------
   If you have to loop over time consuming method [ say List<Integer> compute] for lots of objects [say class BusinessProblem]. 
   
   Steps
@@ -24,7 +25,7 @@ It is as simple as that.
 
 
 Examples 
-
+------
   ForkAndJoinLoopUtilExample.java 
   
 
