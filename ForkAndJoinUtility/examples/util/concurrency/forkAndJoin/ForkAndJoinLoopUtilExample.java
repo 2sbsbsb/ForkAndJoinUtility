@@ -67,7 +67,7 @@ public class ForkAndJoinLoopUtilExample {
 
 		// Suppose you have to loop over lots of time consuming objects Ex:
 		// GenericProblem
-		int numOfProblems = 50000;
+		int numOfProblems = 10000;
 		List<GenericProblem> problems = new ArrayList<GenericProblem>();
 		for (int i = 0; i < numOfProblems; i++) {
 			problems.add(new GenericProblem("problem" + i));
