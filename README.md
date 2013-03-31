@@ -35,8 +35,8 @@ Tasks   	-> time (seconds)
 
 --------------------------------------
 
-fork & Join 		-> 32.94075471
+Simple looping 		-> 6.666775879
 
-Simple looping 		-> 9.620913634999999
+fork & Join 		-> 3.792459488
 
-Sum(Tasks)	-> 42.561668345  
+Sum(Tasks)	-> 10.459235367
