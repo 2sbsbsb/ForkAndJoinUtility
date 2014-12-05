@@ -33,6 +33,12 @@ public final class ProblemSolutions<P extends ProblemSolution<S>, S> extends
 		this.threshold = threshold;
 	}
 
+	public ProblemSolutions(List<P> problems, int threshold, int from, int to) {
+		this(problems, threshold);
+		this.from = from;
+		this.to = to;
+	}
+
 	/*-
 	 * If the problems size is less than threshold it executes it without using fork and join way. 
 	 * If the problems size is more than threshold, it uses fork and join method.  
@@ -40,15 +46,15 @@ public final class ProblemSolutions<P extends ProblemSolution<S>, S> extends
 	@Override
 	public Map<String, S> compute() {
 		Map<String, S> solutionsMap = new HashMap<String, S>();
-		int sizeOfTheProblem = problems.size();
+		int sizeOfTheProblem = to - from;
 		if (sizeOfTheProblem <= threshold) {
-			solutionsMap.putAll(compute(problems));
+			solutionsMap.putAll(compute(problems, from, to));
 		} else {
 			int mid = sizeOfTheProblem / 2;
 			ProblemSolutions<P, S> firstHalf = new ProblemSolutions<P, S>(
-					problems.subList(0, mid), threshold);
+					problems, threshold, from, mid);
 			ProblemSolutions<P, S> secondHalf = new ProblemSolutions<P, S>(
-					problems.subList(mid, sizeOfTheProblem), threshold);
+					problems, threshold, from + mid, to);
 			// The order is very important from here
 			firstHalf.fork();
 			// This is calculated in the current thread itself
@@ -66,9 +72,10 @@ public final class ProblemSolutions<P extends ProblemSolution<S>, S> extends
 	 * @param problems
 	 * @return
 	 */
-	private Map<String, S> compute(List<P> problems) {
+	private Map<String, S> compute(List<P> problems, int from, int to) {
 		Map<String, S> solutionMap = new HashMap<String, S>();
-		for (P problem : problems) {
+		for (int i = from; i < to; i ++) {
+			problem = problems.get(i);
 			solutionMap.put(problem.getProblemName(), problem.solve());
 		}
 		return solutionMap;
